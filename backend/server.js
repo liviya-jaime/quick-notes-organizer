@@ -1,24 +1,25 @@
 // server.js
 
-// ... imports here (express, dotenv, mongoose) ...
-// Note: You need to install the asyncHandler package now!
-const asyncHandler = require('express-async-handler'); 
+// Add 'cors' to the imports list
+const express = require('express');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+const cors = require('cors'); // <-- NEW IMPORT
 
-// ... connectDB function here ...
-
-// Import the new note routes file
-const noteRoutes = require('./routes/noteRoutes'); // <-- NEW IMPORT
+// ... rest of the imports ...
 
 // ... connectDB() call here ...
 
 // 2. Initialize the Express application
 const app = express();
-app.use(express.json()); // <-- IMPORTANT: Allows the server to accept JSON data from the frontend
 
 // ------------------------------------------
-// New: Tells the server to use the note routes
+// New: Allow requests from the frontend port 5173
 // ------------------------------------------
-app.use('/api/notes', noteRoutes); // If anyone goes to /api/notes, use the logic in noteRoutes.js
+app.use(cors({
+    origin: 'http://localhost:5173'
+}));
 // ------------------------------------------
 
+app.use(express.json()); 
 // ... rest of the server code here ...
