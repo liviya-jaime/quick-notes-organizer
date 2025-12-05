@@ -1,0 +1,5 @@
+# This tells Git not to track the large dependencies folder
+/node_modules
+
+# This tells Git not to track your secret database address file
+.env
